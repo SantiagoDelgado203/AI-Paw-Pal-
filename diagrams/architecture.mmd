@@ -1,0 +1,66 @@
+%% PawPal+ AI Care Assistant - system architecture
+%% Render: paste into https://mermaid.live or view on GitHub (README embeds the same diagram).
+flowchart TD
+    U([👤 Pet owner]) -->|question or care request| UI[Streamlit app.py<br/>🤖 AI assistant tab<br/>or CLI ai_assistant.py]
+
+    subgraph GUARD_IN [Input guardrails · guardrails.py]
+        V[Validate text<br/>empty / too long]
+        E{Emergency or<br/>unsafe request?}
+        T{Pet-related?}
+    end
+    UI --> V --> E
+    E -->|emergency| EM[⚠️ Contact-a-vet message<br/>LLM is skipped]
+    E -->|unsafe dose / toxic food| BL[⛔ Request blocked]
+    E -->|ok| T
+    T -->|off-topic| RF[Polite refusal]
+
+    subgraph RAG [Retrieval · knowledge.py]
+        KB[(knowledge/*.md<br/>24 sections + TASK templates)]
+        R[TF-IDF retriever<br/>species boost + synonyms]
+        KB --> R
+    end
+
+    subgraph AGENT [Agent · agent.py]
+        P1[1 PLAN<br/>request → care topics]
+        P2[2 RETRIEVE<br/>one search per topic]
+        P3[3 PROPOSE<br/>LLM drafts tasks w/ source ids]
+        P4[4 VALIDATE<br/>schema · safety · grounding ·<br/>applicability · duplicates]
+        P5[5 ACT<br/>place on sandbox copy;<br/>move on conflict]
+        P6[6 CHECK<br/>budget · conflicts · coverage<br/>→ confidence score]
+        P7{Topic<br/>uncovered?}
+        P1 --> P2 --> P3 --> P4 --> P5 --> P6 --> P7
+        P7 -->|yes, once: feedback + wider k| P2
+        QA[Grounded Q&A<br/>answer + citation check<br/>+ confidence]
+    end
+
+    T -->|question| QA
+    T -->|plan request| P1
+    P2 <--> R
+    QA <--> R
+
+    subgraph LLMS [LLM backends · llm.py]
+        C[ClaudeLLM<br/>claude-opus-5-5<br/>JSON schema output]
+        O[OfflineLLM<br/>deterministic, extractive]
+        C -.->|API error / refusal| O
+    end
+    P3 <--> LLMS
+    QA <--> LLMS
+
+    SCHED[pawpal_system.Scheduler<br/>conflicts · free slots · budget]
+    P5 <--> SCHED
+    P6 <--> SCHED
+
+    P7 -->|no| REVIEW[[👤 Human review<br/>tick / untick each suggestion]]
+    QA --> OUT[Answer + sources + confidence]
+    REVIEW -->|approved only| SAVE[(data.json<br/>real schedule)]
+
+    LOG[(logs/pawpal_ai.log<br/>every step + decision)]
+    AGENT -.-> LOG
+    GUARD_IN -.-> LOG
+
+    subgraph TESTING [Reliability checks]
+        PT[pytest: 92 tests<br/>incl. fake-Claude + UI AppTest]
+        EV[evaluation/run_eval.py<br/>28 scored cases → results_*.md]
+    end
+    PT -.->|verifies| AGENT
+    EV -.->|measures| AGENT
