@@ -4,6 +4,7 @@ from pathlib import Path
 
 import streamlit as st
 
+from pawpal_ai import CareAssistant, configure_logging
 from pawpal_system import Owner, Pet, Scheduler, Task
 
 DATA_FILE = Path(os.environ.get("PAWPAL_DATA_FILE", Path(__file__).parent / "data.json"))
@@ -104,7 +105,8 @@ if not owner.pets:
 
 day = st.date_input("📅 Day", value=date.today())
 
-tab_schedule, tab_add, tab_plan = st.tabs(["📋 Schedule", "➕ Add task", "🧠 Smart plan"])
+tab_schedule, tab_add, tab_plan, tab_ai = st.tabs(
+    ["📋 Schedule", "➕ Add task", "🧠 Smart plan", "🤖 AI assistant"])
 
 # --- Schedule tab ---------------------------------------------------------
 with tab_schedule:
@@ -229,3 +231,81 @@ with tab_plan:
               "Minutes": e.task.duration_minutes, "Why": e.reason} for e in plan],
             hide_index=True, width="stretch",
         )
+
+# --- AI assistant tab -----------------------------------------------------
+@st.cache_resource
+def get_assistant() -> CareAssistant:
+    """Build the assistant once per server (loads the knowledge base, picks a backend)."""
+    configure_logging()
+    return CareAssistant()
+
+
+with tab_ai:
+    assistant = get_assistant()
+    st.caption(f"Backend: **{assistant.llm.name}** · answers come only from the "
+               f"{len(assistant.retriever.chunks)}-section pet-care knowledge base in `knowledge/`. "
+               "Not a substitute for a veterinarian.")
+    mode = st.radio("What do you need?", ["💬 Ask a question", "🗓️ Draft a care plan"],
+                    horizontal=True)
+
+    if mode == "💬 Ask a question":
+        with st.form("ask_form"):
+            ask_pet = st.selectbox("About which pet?", [p.name for p in owner.pets])
+            question = st.text_input("Question", placeholder="How often should I brush my cat?")
+            asked = st.form_submit_button("Ask", type="primary")
+        if asked:
+            ans = assistant.answer_question(question, owner.get_pet(ask_pet).species)
+            show = {"answered": st.success, "refused": st.info, "emergency": st.error,
+                    "error": st.warning}[ans.status]
+            show(ans.text)
+            st.caption(f"Confidence {ans.confidence:.0%} · status: {ans.status} · backend: {ans.backend}")
+            if ans.sources:
+                with st.expander("📚 Sources used"):
+                    for r in ans.sources:
+                        st.markdown(f"**{r.chunk.label}** (`{r.chunk.id}`, score {r.score:.2f})\n\n> {r.chunk.text}")
+            for note in ans.notes:
+                st.caption(f"ℹ️ {note}")
+    else:
+        with st.form("plan_form"):
+            plan_pet = st.selectbox("Pet", [p.name for p in owner.pets])
+            request = st.text_input("What should the plan cover?",
+                                    placeholder="A daily routine with walks, meals, and play")
+            drafted = st.form_submit_button("Draft plan", type="primary")
+        if drafted:
+            st.session_state.ai_plan = assistant.plan_care(owner, plan_pet, request, day)
+
+        plan = st.session_state.get("ai_plan")
+        if plan is not None:
+            if plan.status != "ok":
+                st.error(plan.trace[-1])
+            else:
+                (st.warning if plan.needs_review else st.success)(
+                    f"Confidence **{plan.confidence:.0%}**"
+                    + (" · low confidence, review carefully" if plan.needs_review else "")
+                    + f" · topics: {', '.join(plan.topics)}")
+                st.markdown("**Review the suggestions and tick the ones to add** (nothing is saved "
+                            "until you approve):")
+                approved = []
+                for i, p in enumerate(plan.accepted):
+                    t = p.task
+                    label = (f"{t.time} · {t.emoji()} {t.description} · {t.duration_minutes} min · "
+                             f"{PRIORITY_BADGES[t.priority]} · {t.frequency}")
+                    if st.checkbox(label, value=True, key=f"ai_ok_{i}_{t.description}"):
+                        approved.append(i)
+                    st.caption(f"↳ {p.rationale} — source `{p.source}`"
+                               + (f" · {'; '.join(p.notes)}" if p.notes else ""))
+                if not plan.accepted:
+                    st.info("No new tasks to suggest.")
+                if plan.rejected:
+                    with st.expander(f"✘ {len(plan.rejected)} suggestion(s) rejected by guardrails"):
+                        for desc, reason in plan.rejected:
+                            st.markdown(f"- **{desc}**: {reason}")
+                with st.expander("🔍 Agent trace (how this plan was made)"):
+                    st.code("\n".join(plan.trace), language=None)
+                if plan.accepted and st.button(f"✅ Add {len(approved)} approved task(s)",
+                                               disabled=not approved):
+                    added = CareAssistant.apply_plan(owner, plan, approved)
+                    save()
+                    del st.session_state.ai_plan
+                    flash("success", f"Added {len(added)} AI-suggested task(s) for {plan.pet_name}.")
+                    st.rerun()
