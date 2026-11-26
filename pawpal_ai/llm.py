@@ -22,12 +22,14 @@ from typing import Protocol
 from pawpal_system import Pet
 
 from .guardrails import applicability_issue
-from .knowledge import RetrievedChunk, tokenize
+from .knowledge import RetrievedChunk, expand_tokens, tokenize
 
 log = logging.getLogger(__name__)
 
 GENERIC_TERMS = frozenset({"dog", "cat", "rabbit", "bird", "pet", "puppy", "kitten", "my"})
-CLAUDE_MODEL =os.environ.get("PAWPAL_CLAUDE_MODEL", "claude-opus-5-5")
+# A sentence that opens with one of these words refers back to the sentence before it.
+DANGLING_STARTS = {"these", "this", "those", "they", "it"}
+CLAUDE_MODEL = os.environ.get("PAWPAL_CLAUDE_MODEL", "claude-opus-5-5")
 
 
 class LLMError(RuntimeError):
@@ -71,21 +73,26 @@ class OfflineLLM:
     def answer(self, question: str, chunks: list[RetrievedChunk]) -> dict:
         """Pick the retrieved sentences that best overlap the question and cite them."""
         # Species words match almost every sentence, so they don't count as evidence.
-        q_terms = set(tokenize(question)) - GENERIC_TERMS
+        q_terms = set(expand_tokens(tokenize(question))) - GENERIC_TERMS
         scored = []
         for rank, r in enumerate(chunks):
-            for i, sentence in enumerate(re.split(r"(?<=[.!?])\s+", r.chunk.text)):
+            sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", r.chunk.text)]
+            for i, sentence in enumerate(sentences):
                 overlap = len(q_terms & set(tokenize(sentence)))
                 if overlap:
+                    # "Never feed these foods..." needs the sentence before it to make sense.
+                    if i > 0 and DANGLING_STARTS & set(sentence.lower().split()[:4]):
+                        sentence = f"{sentences[i - 1]} {sentence}"
                     # Prefer high overlap, then higher-ranked chunks, then earlier sentences.
-                    scored.append((-overlap, rank, i, sentence.strip(), r.chunk.id))
+                    scored.append((-overlap, rank, i, sentence, r.chunk.id))
         if not scored:
             return {"answer": "", "sources": [], "answerable": False}
         top_overlap = -min(scored)[0]
         best = [s for s in sorted(scored) if -s[0] >= max(1, top_overlap * 0.6)][:3]
         best.sort(key=lambda s: (s[1], s[2]))  # restore reading order
+        text = " ".join(dict.fromkeys(s[3] for s in best))  # drop repeats from context repair
         sources = list(dict.fromkeys(s[4] for s in best))
-        return {"answer": " ".join(s[3] for s in best), "sources": sources, "answerable": True}
+        return {"answer": text, "sources": sources, "answerable": True}
 
     def propose_tasks(self, pet: Pet, request: str, chunks: list[RetrievedChunk],
                       feedback: str | None = None) -> list[dict]:

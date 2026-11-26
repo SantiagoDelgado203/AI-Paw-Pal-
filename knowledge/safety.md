@@ -5,6 +5,7 @@ species: all
 
 ## Toxic foods and substances
 Chocolate, xylitol (a sweetener in gum and some peanut butters), grapes and raisins, onions, garlic, alcohol, and caffeine are toxic to dogs and cats.
+Never feed these foods to pets, even as a small treat.
 Lilies are extremely toxic to cats; even pollen or vase water can cause kidney failure.
 Avocado and non-stick cookware fumes are dangerous for birds.
 If a pet eats something toxic, contact a veterinarian or an animal poison control line right away.

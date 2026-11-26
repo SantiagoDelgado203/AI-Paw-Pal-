@@ -29,9 +29,17 @@ STOPWORDS = frozenset(
     needs much many often day days get give per""".split()
 )
 TASK_LINE = re.compile(r"^TASK:\s*(.+)$", re.MULTILINE)
-# Query expansion: everyday words -> the species names used in the knowledge base.
-SYNONYMS = {"puppy": "dog", "pup": "dog", "kitten": "cat", "kitty": "cat", "bunny": "rabbit",
-            "parrot": "bird", "parakeet": "bird", "budgie": "bird", "cockatiel": "bird"}
+# Query expansion: everyday words -> the terms the knowledge base uses. Hand-written, because
+# a keyword retriever has no notion of meaning ("eat" never matches "diet" on its own).
+SYNONYMS = {"puppy": ["dog"], "pup": ["dog"], "kitten": ["cat"], "kitty": ["cat"],
+            "bunny": ["rabbit"], "parrot": ["bird"], "parakeet": ["bird"], "budgie": ["bird"],
+            "cockatiel": ["bird"], "eat": ["diet", "food", "feed"], "food": ["diet", "feed"],
+            "nail": ["claw", "trim"], "claw": ["nail", "trim"], "poop": ["litter", "potty"]}
+
+
+def expand_tokens(tokens: list[str]) -> list[str]:
+    """Append synonyms for any token that has them (originals keep their weight)."""
+    return tokens + [syn for t in tokens for syn in SYNONYMS.get(t, [])]
 
 
 def tokenize(text: str) -> list[str]:
@@ -41,7 +49,9 @@ def tokenize(text: str) -> list[str]:
     for w in words:
         if w in STOPWORDS or len(w) < 2:
             continue
-        if len(w) > 4 and w.endswith("ies"):
+        if len(w) > 5 and w.endswith("ing"):
+            w = w[:-3]  # feeding -> feed, brushing -> brush
+        elif len(w) > 4 and w.endswith("ies"):
             w = w[:-3] + "y"  # puppies -> puppy
         elif len(w) > 3 and w.endswith("s") and not w.endswith("ss"):
             w = w[:-1]  # walks -> walk
@@ -165,9 +175,7 @@ class Retriever:
     def search(self, query: str, species: str | None = None, k: int = 4,
                min_score: float = 0.0) -> list[RetrievedChunk]:
         """Return up to k chunks most similar to the query, best first."""
-        tokens = tokenize(query)
-        tokens += [SYNONYMS[t] for t in tokens if t in SYNONYMS]
-        qvec = self._vectorize(tokens)
+        qvec = self._vectorize(expand_tokens(tokenize(query)))
         species = species.lower() if species else None
         results = []
         for chunk, vec in zip(self.chunks, self.vectors):

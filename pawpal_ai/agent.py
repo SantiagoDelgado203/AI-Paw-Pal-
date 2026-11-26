@@ -278,8 +278,10 @@ class CareAssistant:
         retrieval = min(1.0, (sum(r.score for r in sources[:3]) / max(1, len(sources[:3]))) / 0.5)
         constraints = 1.0 if checks["no_conflicts"] and checks["within_budget"] else 0.5
         confidence = round(0.3 * retrieval + 0.2 * grounded + 0.3 * coverage + 0.2 * constraints, 2)
-        if not accepted:
-            confidence = 0.0
+        if not accepted and coverage < 1:
+            confidence = 0.0  # nothing usable was produced
+        elif not accepted:
+            step("CHECK: every requested topic is already covered by existing tasks; nothing new needed")
         step(f"CHECK: confidence={confidence} (retrieval={retrieval:.2f}, grounded={grounded:.2f}, "
              f"coverage={coverage:.2f}, constraints={constraints})")
         return PlanResult(pet.name, request, day, topics, accepted, rejected, sources, confidence,
