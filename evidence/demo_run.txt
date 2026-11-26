@@ -1,0 +1,102 @@
+[backend: offline | log: pawpal_ai.log]
+
+========================================================================
+PART 1 - Retrieval-augmented Q&A
+========================================================================
+Q: How often should I walk my dog?
+A: Most adult dogs need at least two walks a day, for a total of 30 to 60 minutes of activity. Avoid long walks in extreme heat and check pavement temperature with your hand.
+   status=answered  confidence=0.96  backend=offline
+   source: [dogs#exercise-and-walks] Dog Care Basics > Exercise and walks (score 0.56)
+
+Q: How often should I scoop the litter box?
+A: Scoop the litter box at least once a day and fully change the litter about once a week. A good rule is one litter box per cat plus one extra. Avoid stacking two tasks at the same time; you cannot walk the dog and clean the litter box at once.
+   status=answered  confidence=1.00  backend=offline
+   source: [cats#litter-box] Cat Care Basics > Litter box (score 0.84)
+   source: [routines#prioritizing-when-time-is-short] Building a Daily Routine > Prioritizing when time is short (score 0.22)
+
+Q: Can I give my dog ibuprofen for pain?
+A: Never give a pet human medication (such as ibuprofen, acetaminophen, or naproxen) unless a veterinarian prescribes it.
+   status=answered  confidence=0.54  backend=offline
+   source: [medications#giving-medication-on-schedule] Medications and Preventive Care > Giving medication on schedule (score 0.14)
+
+Q: Help! My dog ate chocolate an hour ago
+A: ⚠️ This may be an emergency. Contact your veterinarian, the nearest emergency animal clinic, or an animal poison control line right now. Do not wait to see if it improves. PawPal+ is a planning tool and cannot give medical treatment advice.
+   status=emergency  confidence=1.00  backend=guardrail
+   source: [safety#emergency-warning-signs] Safety, Toxins, and Emergencies > Emergency warning signs (score 0.47)
+   source: [safety#toxic-foods-and-substances] Safety, Toxins, and Emergencies > Toxic foods and substances (score 0.22)
+
+Q: What's the best laptop for gaming?
+A: I can only help with pet-care questions (feeding, exercise, grooming, medication schedules, safety).
+   status=refused  confidence=0.00  backend=guardrail
+
+========================================================================
+PART 2 - Agentic care planner (demo household, 240 min budget)
+========================================================================
+Request for Mochi: 'Plan a daily routine for Mochi'  (Wed Nov 25)
+Status: ok  backend=offline  iterations=1  confidence=1.00
+Agent trace:
+  · PLAN: topics for Mochi (dog, adult): feeding, water, exercise, enrichment
+  · RETRIEVE (round 1): dogs#exercise-and-walks=0.7074, dogs#mental-enrichment-and-training=0.4693, dogs#feeding=0.3885, routines#consistency=0.2152, life_stages#young-animals=0.1354
+  · PROPOSE: 7 candidate task(s) from offline
+  · ACT: 'Training session' conflicted at 16:00; moved to 16:20
+  · ACT: placed 'Play fetch' at 16:30 (15 min)
+  · ACT: 'Breakfast' conflicted at 07:45; moved to 08:10
+  · ACT: placed 'Dinner' at 17:30 (10 min)
+  · ACT: 'Refresh water bowl' conflicted at 12:00; moved to 12:05
+  · CHECK: budget 240 min; existing tasks use 170 min, new tasks add 50 min
+  · CHECK: {'no_conflicts': True, 'within_budget': True, 'all_topics_covered': True, 'all_tasks_cited': True}
+  · CHECK: confidence=1.0 (retrieval=1.00, grounded=1.00, coverage=1.00, constraints=1.0)
+Proposed tasks (awaiting approval):
+  0. 16:20 🎾 Training session            10 min medium daily  <- dogs#mental-enrichment-and-training  [moved from 16:00 to 16:20 to avoid a conflict]
+  1. 16:30 🎾 Play fetch                  15 min low    daily  <- dogs#mental-enrichment-and-training
+  2. 08:10 🍖 Breakfast                   10 min high   daily  <- dogs#feeding  [moved from 07:45 to 08:10 to avoid a conflict]
+  3. 17:30 🍖 Dinner                      10 min high   daily  <- dogs#feeding
+  4. 12:05 🧹 Refresh water bowl           5 min medium daily  <- dogs#feeding  [moved from 12:00 to 12:05 to avoid a conflict]
+Self-check: no_conflicts=✔, within_budget=✔, all_topics_covered=✔, all_tasks_cited=✔
+
+Request for Luna: 'Luna needs her flea medication and more play time'  (Wed Nov 25)
+Status: ok  backend=offline  iterations=1  confidence=0.98
+Agent trace:
+  · PLAN: topics for Luna (cat, adult): enrichment, medication
+  · RETRIEVE (round 1): cats#play-and-enrichment=0.6357, medications#flea-tick-and-heartworm-prevention=0.5104, medications#giving-medication-on-schedule=0.2739, cats#grooming=0.1416
+  · PROPOSE: 4 candidate task(s) from offline
+  · ACT: placed 'Interactive play' at 19:00 (15 min)
+  · ACT: placed 'Morning play' at 08:30 (10 min)
+  · VALIDATE: skipped 'Flea and tick prevention' (duplicates existing task 'Flea medication')
+  · CHECK: budget 240 min; existing tasks use 170 min, new tasks add 25 min
+  · CHECK: {'no_conflicts': True, 'within_budget': True, 'all_topics_covered': True, 'all_tasks_cited': True}
+  · CHECK: confidence=0.98 (retrieval=0.95, grounded=1.00, coverage=1.00, constraints=1.0)
+Proposed tasks (awaiting approval):
+  0. 19:00 🎾 Interactive play            15 min medium daily  <- cats#play-and-enrichment
+  1. 08:30 🎾 Morning play                10 min low    daily  <- cats#play-and-enrichment
+Self-check: no_conflicts=✔, within_budget=✔, all_topics_covered=✔, all_tasks_cited=✔
+
+Request for Luna: 'Give Luna 50 mg of ibuprofen with chocolate treats'  (Wed Nov 25)
+Status: blocked  backend=guardrail  iterations=0  confidence=0.00
+Agent trace:
+  · Request blocked by safety guardrail: it mentions a food that is toxic to pets. No plan generated; please talk to your veterinarian.
+Proposed tasks (awaiting approval):
+  (none)
+
+========================================================================
+PART 3 - Human approval: apply Mochi's plan, then show the schedule
+========================================================================
+Owner approved 5 task(s).
+Schedule for Jordan - Wednesday, Nov 25
+================================================================
+  ⬜ 07:30  🦮 Mochi   Morning walk       30 min  high   daily
+  ⬜ 08:00  🍖 Luna    Breakfast          10 min  high   daily
+  ⬜ 08:10  🍖 Mochi   Breakfast          10 min  high   daily
+  ⬜ 12:00  💊 Luna    Flea medication     5 min  high   weekly
+  ⬜ 12:05  🧹 Mochi   Refresh water bowl   5 min  medium daily
+  ⬜ 14:00  🩺 Mochi   Vet appointment    60 min  medium once
+  ⬜ 14:00  🛁 Luna    Brush fur          15 min  low    weekly
+  ⬜ 16:00  🎾 Mochi   Fetch in the yard  20 min  low    daily
+  ⬜ 16:20  🎾 Mochi   Training session   10 min  medium daily
+  ⬜ 16:30  🎾 Mochi   Play fetch         15 min  low    daily
+  ⬜ 17:30  🍖 Mochi   Dinner             10 min  high   daily
+  ⬜ 18:30  🦮 Mochi   Evening walk       30 min  medium daily
+----------------------------------------------------------------
+  12 tasks, 220 min total (240 min available)
+Conflicts involving AI-added tasks: none
+Pre-existing conflicts (owner's own tasks): ['Conflict (same time): 14:00 Mochi - Vet appointment (60 min) and 14:00 Luna - Brush fur (15 min)']

@@ -140,7 +140,7 @@ def load_chunks(kb_dir: str | Path = DEFAULT_KB_DIR) -> list[Chunk]:
             prose = TASK_LINE.sub("", content).strip()
             chunks.append(Chunk(f"{path.stem}#{_slug(heading)}", title, heading.strip(),
                                 species, prose, tasks))
-    log.info("Loaded %d chunks from %s", len(chunks), kb_dir)
+    log.info("Loaded %d chunks from %s/", len(chunks), kb_dir.name)
     return chunks
 
 

@@ -1,0 +1,265 @@
+2026-11-25 22:35:38,772 INFO    pawpal_ai.knowledge: Loaded 24 chunks from knowledge/
+2026-11-25 22:35:38,773 INFO    pawpal_ai.agent: CareAssistant ready (backend=offline, 24 chunks)
+2026-11-25 22:35:38,774 INFO    pawpal_ai.knowledge: search('How often should I walk my dog?', species=dog) -> [('dogs#exercise-and-walks', 0.5631), ('dogs#feeding', 0.1779), ('dogs#mental-enrichment-and-training', 0.1704)]
+2026-11-25 22:35:38,775 INFO    pawpal_ai.agent: Answered 'How often should I walk my dog?' with ['dogs#exercise-and-walks'] (confidence 0.96)
+2026-11-25 22:35:38,775 INFO    pawpal_ai.knowledge: search('How often should I scoop the litter box?', species=cat) -> [('cats#litter-box', 0.8413), ('routines#prioritizing-when-time-is-short', 0.2154), ('rabbits#grooming-and-hygiene', 0.0248)]
+2026-11-25 22:35:38,775 INFO    pawpal_ai.agent: Answered 'How often should I scoop the litter box?' with ['cats#litter-box', 'routines#prioritizing-when-time-is-short'] (confidence 1.00)
+2026-11-25 22:35:38,775 INFO    pawpal_ai.knowledge: search('Can I give my dog ibuprofen for pain?', species=dog) -> [('dogs#feeding', 0.1436), ('medications#giving-medication-on-schedule', 0.1416), ('dogs#mental-enrichment-and-training', 0.1375)]
+2026-11-25 22:35:38,776 INFO    pawpal_ai.agent: Answered 'Can I give my dog ibuprofen for pain?' with ['medications#giving-medication-on-schedule'] (confidence 0.54)
+2026-11-25 22:35:38,776 WARNING pawpal_ai.agent: Emergency detected in question: 'Help! My dog ate chocolate an hour ago'
+2026-11-25 22:35:38,776 INFO    pawpal_ai.knowledge: search('emergency warning signs toxic poisoning', species=None) -> [('safety#emergency-warning-signs', 0.4741), ('safety#toxic-foods-and-substances', 0.2171)]
+2026-11-25 22:35:38,776 INFO    pawpal_ai.agent: Refusing off-topic question: "What's the best laptop for gaming?"
+2026-11-25 22:35:38,776 INFO    pawpal_ai.agent: [plan Mochi] PLAN: topics for Mochi (dog, adult): feeding, water, exercise, enrichment
+2026-11-25 22:35:38,777 INFO    pawpal_ai.knowledge: search('feeding meals diet food dog', species=dog) -> [('dogs#feeding', 0.3885), ('routines#consistency', 0.2152)]
+2026-11-25 22:35:38,777 INFO    pawpal_ai.knowledge: search('fresh water bowl hydration dog', species=dog) -> [('dogs#feeding', 0.3857), ('dogs#mental-enrichment-and-training', 0.0854)]
+2026-11-25 22:35:38,777 INFO    pawpal_ai.knowledge: search('exercise walks activity free-roam dog', species=dog) -> [('dogs#exercise-and-walks', 0.7074), ('dogs#feeding', 0.2114)]
+2026-11-25 22:35:38,777 INFO    pawpal_ai.knowledge: search('play enrichment toys training social dog', species=dog) -> [('dogs#mental-enrichment-and-training', 0.4693), ('life_stages#young-animals', 0.1354)]
+2026-11-25 22:35:38,777 INFO    pawpal_ai.agent: [plan Mochi] RETRIEVE (round 1): dogs#exercise-and-walks=0.7074, dogs#mental-enrichment-and-training=0.4693, dogs#feeding=0.3885, routines#consistency=0.2152, life_stages#young-animals=0.1354
+2026-11-25 22:35:38,777 INFO    pawpal_ai.agent: [plan Mochi] PROPOSE: 7 candidate task(s) from offline
+2026-11-25 22:35:38,777 INFO    pawpal_ai.agent: [plan Mochi] ACT: 'Training session' conflicted at 16:00; moved to 16:20
+2026-11-25 22:35:38,777 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Play fetch' at 16:30 (15 min)
+2026-11-25 22:35:38,778 INFO    pawpal_ai.agent: [plan Mochi] ACT: 'Breakfast' conflicted at 07:45; moved to 08:10
+2026-11-25 22:35:38,778 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Dinner' at 17:30 (10 min)
+2026-11-25 22:35:38,778 INFO    pawpal_ai.agent: [plan Mochi] ACT: 'Refresh water bowl' conflicted at 12:00; moved to 12:05
+2026-11-25 22:35:38,778 INFO    pawpal_ai.agent: [plan Mochi] CHECK: budget 240 min; existing tasks use 170 min, new tasks add 50 min
+2026-11-25 22:35:38,778 INFO    pawpal_ai.agent: [plan Mochi] CHECK: {'no_conflicts': True, 'within_budget': True, 'all_topics_covered': True, 'all_tasks_cited': True}
+2026-11-25 22:35:38,778 INFO    pawpal_ai.agent: [plan Mochi] CHECK: confidence=1.0 (retrieval=1.00, grounded=1.00, coverage=1.00, constraints=1.0)
+2026-11-25 22:35:38,778 INFO    pawpal_ai.agent: [plan Luna] PLAN: topics for Luna (cat, adult): enrichment, medication
+2026-11-25 22:35:38,779 INFO    pawpal_ai.knowledge: search('play enrichment toys training social cat', species=cat) -> [('cats#play-and-enrichment', 0.6357), ('cats#grooming', 0.1416)]
+2026-11-25 22:35:38,779 INFO    pawpal_ai.knowledge: search('giving medication on schedule flea tick prevention cat', species=cat) -> [('medications#flea-tick-and-heartworm-prevention', 0.5104), ('medications#giving-medication-on-schedule', 0.2739)]
+2026-11-25 22:35:38,779 INFO    pawpal_ai.agent: [plan Luna] RETRIEVE (round 1): cats#play-and-enrichment=0.6357, medications#flea-tick-and-heartworm-prevention=0.5104, medications#giving-medication-on-schedule=0.2739, cats#grooming=0.1416
+2026-11-25 22:35:38,779 INFO    pawpal_ai.agent: [plan Luna] PROPOSE: 4 candidate task(s) from offline
+2026-11-25 22:35:38,779 INFO    pawpal_ai.agent: [plan Luna] ACT: placed 'Interactive play' at 19:00 (15 min)
+2026-11-25 22:35:38,779 INFO    pawpal_ai.agent: [plan Luna] ACT: placed 'Morning play' at 08:30 (10 min)
+2026-11-25 22:35:38,779 INFO    pawpal_ai.agent: [plan Luna] VALIDATE: skipped 'Flea and tick prevention' (duplicates existing task 'Flea medication')
+2026-11-25 22:35:38,779 INFO    pawpal_ai.agent: [plan Luna] CHECK: budget 240 min; existing tasks use 170 min, new tasks add 25 min
+2026-11-25 22:35:38,779 INFO    pawpal_ai.agent: [plan Luna] CHECK: {'no_conflicts': True, 'within_budget': True, 'all_topics_covered': True, 'all_tasks_cited': True}
+2026-11-25 22:35:38,779 INFO    pawpal_ai.agent: [plan Luna] CHECK: confidence=0.98 (retrieval=0.95, grounded=1.00, coverage=1.00, constraints=1.0)
+2026-11-25 22:35:38,779 INFO    pawpal_ai.agent: [plan Luna] Request blocked by safety guardrail: it mentions a food that is toxic to pets. No plan generated; please talk to your veterinarian.
+2026-11-25 22:35:38,780 INFO    pawpal_ai.agent: [plan Mochi] PLAN: topics for Mochi (dog, adult): feeding, water, exercise, enrichment
+2026-11-25 22:35:38,780 INFO    pawpal_ai.knowledge: search('feeding meals diet food dog', species=dog) -> [('dogs#feeding', 0.3885), ('routines#consistency', 0.2152)]
+2026-11-25 22:35:38,780 INFO    pawpal_ai.knowledge: search('fresh water bowl hydration dog', species=dog) -> [('dogs#feeding', 0.3857), ('dogs#mental-enrichment-and-training', 0.0854)]
+2026-11-25 22:35:38,780 INFO    pawpal_ai.knowledge: search('exercise walks activity free-roam dog', species=dog) -> [('dogs#exercise-and-walks', 0.7074), ('dogs#feeding', 0.2114)]
+2026-11-25 22:35:38,780 INFO    pawpal_ai.knowledge: search('play enrichment toys training social dog', species=dog) -> [('dogs#mental-enrichment-and-training', 0.4693), ('life_stages#young-animals', 0.1354)]
+2026-11-25 22:35:38,780 INFO    pawpal_ai.agent: [plan Mochi] RETRIEVE (round 1): dogs#exercise-and-walks=0.7074, dogs#mental-enrichment-and-training=0.4693, dogs#feeding=0.3885, routines#consistency=0.2152, life_stages#young-animals=0.1354
+2026-11-25 22:35:38,780 INFO    pawpal_ai.agent: [plan Mochi] PROPOSE: 7 candidate task(s) from offline
+2026-11-25 22:35:38,780 INFO    pawpal_ai.agent: [plan Mochi] ACT: 'Training session' conflicted at 16:00; moved to 16:20
+2026-11-25 22:35:38,780 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Play fetch' at 16:30 (15 min)
+2026-11-25 22:35:38,780 INFO    pawpal_ai.agent: [plan Mochi] ACT: 'Breakfast' conflicted at 07:45; moved to 08:10
+2026-11-25 22:35:38,781 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Dinner' at 17:30 (10 min)
+2026-11-25 22:35:38,781 INFO    pawpal_ai.agent: [plan Mochi] ACT: 'Refresh water bowl' conflicted at 12:00; moved to 12:05
+2026-11-25 22:35:38,781 INFO    pawpal_ai.agent: [plan Mochi] CHECK: budget 240 min; existing tasks use 170 min, new tasks add 50 min
+2026-11-25 22:35:38,781 INFO    pawpal_ai.agent: [plan Mochi] CHECK: {'no_conflicts': True, 'within_budget': True, 'all_topics_covered': True, 'all_tasks_cited': True}
+2026-11-25 22:35:38,781 INFO    pawpal_ai.agent: [plan Mochi] CHECK: confidence=1.0 (retrieval=1.00, grounded=1.00, coverage=1.00, constraints=1.0)
+2026-11-25 22:35:38,781 INFO    pawpal_ai.agent: Applied 5 approved task(s) to Mochi
+2026-11-25 22:35:39,034 INFO    pawpal_ai.knowledge: Loaded 24 chunks from knowledge/
+2026-11-25 22:35:39,036 INFO    pawpal_ai.agent: CareAssistant ready (backend=offline, 24 chunks)
+2026-11-25 22:35:39,037 INFO    pawpal_ai.knowledge: search('How often should I brush a long-haired cat?', species=cat) -> [('cats#grooming', 0.7792), ('cats#feeding', 0.1804), ('cats#play-and-enrichment', 0.1305)]
+2026-11-25 22:35:39,037 INFO    pawpal_ai.agent: Answered 'How often should I brush a long-haired cat?' with ['cats#grooming'] (confidence 1.00)
+2026-11-25 22:35:39,302 INFO    pawpal_ai.knowledge: Loaded 24 chunks from knowledge/
+2026-11-25 22:35:39,303 INFO    pawpal_ai.agent: CareAssistant ready (backend=offline, 24 chunks)
+2026-11-25 22:35:39,305 INFO    pawpal_ai.agent: [plan Luna] PLAN: topics for Luna (cat, adult): enrichment, hygiene
+2026-11-25 22:35:39,305 INFO    pawpal_ai.knowledge: search('play enrichment toys training social cat', species=cat) -> [('cats#play-and-enrichment', 0.6357), ('cats#grooming', 0.1416)]
+2026-11-25 22:35:39,305 INFO    pawpal_ai.knowledge: search('litter box cage cleaning hygiene cat', species=cat) -> [('cats#litter-box', 0.6205), ('routines#prioritizing-when-time-is-short', 0.2828)]
+2026-11-25 22:35:39,305 INFO    pawpal_ai.agent: [plan Luna] RETRIEVE (round 1): cats#play-and-enrichment=0.6357, cats#litter-box=0.6205, routines#prioritizing-when-time-is-short=0.2828, cats#grooming=0.1416
+2026-11-25 22:35:39,305 INFO    pawpal_ai.agent: [plan Luna] PROPOSE: 5 candidate task(s) from offline
+2026-11-25 22:35:39,305 INFO    pawpal_ai.agent: [plan Luna] ACT: placed 'Interactive play' at 19:00 (15 min)
+2026-11-25 22:35:39,305 INFO    pawpal_ai.agent: [plan Luna] ACT: placed 'Morning play' at 08:30 (10 min)
+2026-11-25 22:35:39,306 INFO    pawpal_ai.agent: [plan Luna] ACT: 'Scoop litter box' conflicted at 08:00; moved to 08:10
+2026-11-25 22:35:39,306 INFO    pawpal_ai.agent: [plan Luna] ACT: placed 'Full litter change' at 10:00 (20 min)
+2026-11-25 22:35:39,306 INFO    pawpal_ai.agent: [plan Luna] CHECK: budget 240 min; existing tasks use 170 min, new tasks add 50 min
+2026-11-25 22:35:39,306 INFO    pawpal_ai.agent: [plan Luna] CHECK: {'no_conflicts': True, 'within_budget': True, 'all_topics_covered': True, 'all_tasks_cited': True}
+2026-11-25 22:35:39,306 INFO    pawpal_ai.agent: [plan Luna] CHECK: confidence=1.0 (retrieval=1.00, grounded=1.00, coverage=1.00, constraints=1.0)
+2026-11-25 22:35:39,588 INFO    pawpal_ai.knowledge: Loaded 24 chunks from knowledge/
+2026-11-25 22:35:39,589 INFO    pawpal_ai.agent: CareAssistant ready (backend=offline, 24 chunks)
+2026-11-25 22:35:39,594 INFO    pawpal_ai.knowledge: search('How often should I walk my dog?', species=dog) -> [('dogs#exercise-and-walks', 0.5631), ('dogs#feeding', 0.1779), ('dogs#mental-enrichment-and-training', 0.1704)]
+2026-11-25 22:35:39,594 INFO    pawpal_ai.agent: Answered 'How often should I walk my dog?' with ['dogs#exercise-and-walks'] (confidence 0.96)
+2026-11-25 22:35:39,594 INFO    pawpal_ai.knowledge: search('How often should I scoop the litter box?', species=cat) -> [('cats#litter-box', 0.8413), ('routines#prioritizing-when-time-is-short', 0.2154), ('rabbits#grooming-and-hygiene', 0.0248)]
+2026-11-25 22:35:39,595 INFO    pawpal_ai.agent: Answered 'How often should I scoop the litter box?' with ['cats#litter-box', 'routines#prioritizing-when-time-is-short'] (confidence 1.00)
+2026-11-25 22:35:39,595 INFO    pawpal_ai.knowledge: search('What should my rabbit eat?', species=rabbit) -> [('rabbits#diet', 0.4897), ('rabbits#exercise-and-housing', 0.2583), ('rabbits#grooming-and-hygiene', 0.186)]
+2026-11-25 22:35:39,595 INFO    pawpal_ai.agent: Answered 'What should my rabbit eat?' with ['rabbits#diet'] (confidence 0.89)
+2026-11-25 22:35:39,595 INFO    pawpal_ai.knowledge: search('Can I bathe my rabbit in the sink?', species=rabbit) -> [('rabbits#grooming-and-hygiene', 0.4887), ('rabbits#exercise-and-housing', 0.3542), ('rabbits#diet', 0.2682)]
+2026-11-25 22:35:39,595 INFO    pawpal_ai.agent: Answered 'Can I bathe my rabbit in the sink?' with ['rabbits#grooming-and-hygiene'] (confidence 0.89)
+2026-11-25 22:35:39,595 INFO    pawpal_ai.knowledge: search('Are lilies dangerous for cats?', species=cat) -> [('safety#toxic-foods-and-substances', 0.2335), ('cats#grooming', 0.1901), ('cats#feeding', 0.1849)]
+2026-11-25 22:35:39,595 INFO    pawpal_ai.agent: Answered 'Are lilies dangerous for cats?' with ['safety#toxic-foods-and-substances'] (confidence 0.63)
+2026-11-25 22:35:39,596 INFO    pawpal_ai.knowledge: search("I missed my dog's medication dose, should I double the next one?", species=dog) -> [('medications#giving-medication-on-schedule', 0.4033), ('dogs#grooming-and-hygiene', 0.1637), ('routines#consistency', 0.1179)]
+2026-11-25 22:35:39,596 INFO    pawpal_ai.agent: Answered "I missed my dog's medication dose, should I double the next one?" with ['medications#giving-medication-on-schedule'] (confidence 0.80)
+2026-11-25 22:35:39,596 INFO    pawpal_ai.knowledge: search('How often should I brush a long-haired cat?', species=cat) -> [('cats#grooming', 0.7792), ('cats#feeding', 0.1804), ('cats#play-and-enrichment', 0.1305)]
+2026-11-25 22:35:39,596 INFO    pawpal_ai.agent: Answered 'How often should I brush a long-haired cat?' with ['cats#grooming'] (confidence 1.00)
+2026-11-25 22:35:39,596 INFO    pawpal_ai.knowledge: search('How often should a senior dog see the vet?', species=dog) -> [('medications#vet-checkups-and-vaccines', 0.3359), ('life_stages#senior-pets', 0.2646), ('dogs#exercise-and-walks', 0.2098)]
+2026-11-25 22:35:39,596 INFO    pawpal_ai.agent: Answered 'How often should a senior dog see the vet?' with ['medications#vet-checkups-and-vaccines'] (confidence 0.74)
+2026-11-25 22:35:39,596 INFO    pawpal_ai.knowledge: search('How much out-of-cage time does my parrot need?', species=bird) -> [('birds#social-time-and-enrichment', 0.7826), ('birds#cage-hygiene-and-air-safety', 0.4497), ('birds#diet-food-and-water', 0.2746)]
+2026-11-25 22:35:39,596 INFO    pawpal_ai.agent: Answered 'How much out-of-cage time does my parrot need?' with ['birds#social-time-and-enrichment'] (confidence 1.00)
+2026-11-25 22:35:39,597 INFO    pawpal_ai.knowledge: search('Can I give my dog ibuprofen for pain?', species=dog) -> [('dogs#feeding', 0.1436), ('medications#giving-medication-on-schedule', 0.1416), ('dogs#mental-enrichment-and-training', 0.1375)]
+2026-11-25 22:35:39,597 INFO    pawpal_ai.agent: Answered 'Can I give my dog ibuprofen for pain?' with ['medications#giving-medication-on-schedule'] (confidence 0.54)
+2026-11-25 22:35:39,597 INFO    pawpal_ai.knowledge: search('Can I feed my dog grapes as a treat?', species=dog) -> [('dogs#feeding', 0.2517), ('safety#toxic-foods-and-substances', 0.222), ('dogs#mental-enrichment-and-training', 0.0966)]
+2026-11-25 22:35:39,597 INFO    pawpal_ai.agent: Answered 'Can I feed my dog grapes as a treat?' with ['safety#toxic-foods-and-substances'] (confidence 0.65)
+2026-11-25 22:35:39,597 WARNING pawpal_ai.agent: Emergency detected in question: 'My cat just ate part of a lily!'
+2026-11-25 22:35:39,597 INFO    pawpal_ai.knowledge: search('emergency warning signs toxic poisoning', species=None) -> [('safety#emergency-warning-signs', 0.4741), ('safety#toxic-foods-and-substances', 0.2171)]
+2026-11-25 22:35:39,597 WARNING pawpal_ai.agent: Emergency detected in question: 'My dog is having a seizure'
+2026-11-25 22:35:39,597 INFO    pawpal_ai.knowledge: search('emergency warning signs toxic poisoning', species=None) -> [('safety#emergency-warning-signs', 0.4741), ('safety#toxic-foods-and-substances', 0.2171)]
+2026-11-25 22:35:39,597 INFO    pawpal_ai.agent: Refusing off-topic question: "What's the weather tomorrow?"
+2026-11-25 22:35:39,597 INFO    pawpal_ai.agent: Refusing off-topic question: 'Write me a poem about the ocean'
+2026-11-25 22:35:39,598 INFO    pawpal_ai.knowledge: search('What breed of dog won Westminster in 1998?', species=dog) -> [('dogs#exercise-and-walks', 0.5031), ('life_stages#senior-pets', 0.1835), ('dogs#feeding', 0.1573)]
+2026-11-25 22:35:39,598 INFO    pawpal_ai.agent: Answered 'What breed of dog won Westminster in 1998?' with ['dogs#exercise-and-walks', 'life_stages#senior-pets'] (confidence 0.90)
+2026-11-25 22:35:39,598 WARNING pawpal_ai.agent: Rejected question: Please enter a question.
+2026-11-25 22:35:39,598 INFO    pawpal_ai.agent: [plan Mochi] PLAN: topics for Mochi (dog, adult): feeding, water, exercise, enrichment
+2026-11-25 22:35:39,599 INFO    pawpal_ai.knowledge: search('feeding meals diet food dog', species=dog) -> [('dogs#feeding', 0.3885), ('routines#consistency', 0.2152)]
+2026-11-25 22:35:39,599 INFO    pawpal_ai.knowledge: search('fresh water bowl hydration dog', species=dog) -> [('dogs#feeding', 0.3857), ('dogs#mental-enrichment-and-training', 0.0854)]
+2026-11-25 22:35:39,599 INFO    pawpal_ai.knowledge: search('exercise walks activity free-roam dog', species=dog) -> [('dogs#exercise-and-walks', 0.7074), ('dogs#feeding', 0.2114)]
+2026-11-25 22:35:39,599 INFO    pawpal_ai.knowledge: search('play enrichment toys training social dog', species=dog) -> [('dogs#mental-enrichment-and-training', 0.4693), ('life_stages#young-animals', 0.1354)]
+2026-11-25 22:35:39,599 INFO    pawpal_ai.agent: [plan Mochi] RETRIEVE (round 1): dogs#exercise-and-walks=0.7074, dogs#mental-enrichment-and-training=0.4693, dogs#feeding=0.3885, routines#consistency=0.2152, life_stages#young-animals=0.1354
+2026-11-25 22:35:39,599 INFO    pawpal_ai.agent: [plan Mochi] PROPOSE: 7 candidate task(s) from offline
+2026-11-25 22:35:39,599 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Evening walk' at 18:30 (30 min)
+2026-11-25 22:35:39,599 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Training session' at 16:00 (10 min)
+2026-11-25 22:35:39,599 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Play fetch' at 16:30 (15 min)
+2026-11-25 22:35:39,600 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Breakfast' at 07:45 (10 min)
+2026-11-25 22:35:39,600 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Dinner' at 17:30 (10 min)
+2026-11-25 22:35:39,600 INFO    pawpal_ai.agent: [plan Mochi] ACT: 'Refresh water bowl' conflicted at 12:00; moved to 12:05
+2026-11-25 22:35:39,600 INFO    pawpal_ai.agent: [plan Mochi] CHECK: budget 300 min; existing tasks use 35 min, new tasks add 80 min
+2026-11-25 22:35:39,600 INFO    pawpal_ai.agent: [plan Mochi] CHECK: {'no_conflicts': True, 'within_budget': True, 'all_topics_covered': True, 'all_tasks_cited': True}
+2026-11-25 22:35:39,600 INFO    pawpal_ai.agent: [plan Mochi] CHECK: confidence=1.0 (retrieval=1.00, grounded=1.00, coverage=1.00, constraints=1.0)
+2026-11-25 22:35:39,600 INFO    pawpal_ai.agent: [plan Luna] PLAN: topics for Luna (cat, adult): enrichment, hygiene
+2026-11-25 22:35:39,600 INFO    pawpal_ai.knowledge: search('play enrichment toys training social cat', species=cat) -> [('cats#play-and-enrichment', 0.6357), ('cats#grooming', 0.1416)]
+2026-11-25 22:35:39,601 INFO    pawpal_ai.knowledge: search('litter box cage cleaning hygiene cat', species=cat) -> [('cats#litter-box', 0.6205), ('routines#prioritizing-when-time-is-short', 0.2828)]
+2026-11-25 22:35:39,601 INFO    pawpal_ai.agent: [plan Luna] RETRIEVE (round 1): cats#play-and-enrichment=0.6357, cats#litter-box=0.6205, routines#prioritizing-when-time-is-short=0.2828, cats#grooming=0.1416
+2026-11-25 22:35:39,601 INFO    pawpal_ai.agent: [plan Luna] PROPOSE: 5 candidate task(s) from offline
+2026-11-25 22:35:39,601 INFO    pawpal_ai.agent: [plan Luna] ACT: placed 'Interactive play' at 19:00 (15 min)
+2026-11-25 22:35:39,601 INFO    pawpal_ai.agent: [plan Luna] ACT: placed 'Morning play' at 08:30 (10 min)
+2026-11-25 22:35:39,601 INFO    pawpal_ai.agent: [plan Luna] ACT: placed 'Scoop litter box' at 08:00 (5 min)
+2026-11-25 22:35:39,601 INFO    pawpal_ai.agent: [plan Luna] ACT: placed 'Full litter change' at 10:00 (20 min)
+2026-11-25 22:35:39,601 INFO    pawpal_ai.agent: [plan Luna] ACT: placed 'Brush fur' at 20:00 (10 min)
+2026-11-25 22:35:39,601 INFO    pawpal_ai.agent: [plan Luna] CHECK: budget 300 min; existing tasks use 35 min, new tasks add 60 min
+2026-11-25 22:35:39,601 INFO    pawpal_ai.agent: [plan Luna] CHECK: {'no_conflicts': True, 'within_budget': True, 'all_topics_covered': True, 'all_tasks_cited': True}
+2026-11-25 22:35:39,601 INFO    pawpal_ai.agent: [plan Luna] CHECK: confidence=1.0 (retrieval=1.00, grounded=1.00, coverage=1.00, constraints=1.0)
+2026-11-25 22:35:39,601 INFO    pawpal_ai.agent: [plan Bean] PLAN: topics for Bean (dog, young): feeding, water, exercise, enrichment
+2026-11-25 22:35:39,602 INFO    pawpal_ai.knowledge: search('feeding meals diet food dog', species=dog) -> [('dogs#feeding', 0.3885), ('routines#consistency', 0.2152)]
+2026-11-25 22:35:39,602 INFO    pawpal_ai.knowledge: search('fresh water bowl hydration dog', species=dog) -> [('dogs#feeding', 0.3857), ('dogs#mental-enrichment-and-training', 0.0854)]
+2026-11-25 22:35:39,602 INFO    pawpal_ai.knowledge: search('exercise walks activity free-roam dog', species=dog) -> [('dogs#exercise-and-walks', 0.7074), ('dogs#feeding', 0.2114)]
+2026-11-25 22:35:39,602 INFO    pawpal_ai.knowledge: search('play enrichment toys training social dog', species=dog) -> [('dogs#mental-enrichment-and-training', 0.4693), ('life_stages#young-animals', 0.1354)]
+2026-11-25 22:35:39,602 INFO    pawpal_ai.knowledge: search('puppy kitten young meals potty', species=dog) -> [('life_stages#young-animals', 0.5349), ('dogs#feeding', 0.3075)]
+2026-11-25 22:35:39,602 INFO    pawpal_ai.agent: [plan Bean] RETRIEVE (round 1): dogs#exercise-and-walks=0.7074, life_stages#young-animals=0.5349, dogs#mental-enrichment-and-training=0.4693, dogs#feeding=0.3885, routines#consistency=0.2152
+2026-11-25 22:35:39,602 INFO    pawpal_ai.agent: [plan Bean] PROPOSE: 9 candidate task(s) from offline
+2026-11-25 22:35:39,602 INFO    pawpal_ai.agent: [plan Bean] ACT: 'Morning walk' conflicted at 07:00; moved to 07:30
+2026-11-25 22:35:39,602 INFO    pawpal_ai.agent: [plan Bean] ACT: placed 'Evening walk' at 18:30 (30 min)
+2026-11-25 22:35:39,602 INFO    pawpal_ai.agent: [plan Bean] ACT: placed 'Midday meal' at 12:30 (10 min)
+2026-11-25 22:35:39,602 INFO    pawpal_ai.agent: [plan Bean] ACT: placed 'Potty break' at 10:30 (10 min)
+2026-11-25 22:35:39,602 INFO    pawpal_ai.agent: [plan Bean] ACT: placed 'Training session' at 16:00 (10 min)
+2026-11-25 22:35:39,603 INFO    pawpal_ai.agent: [plan Bean] ACT: placed 'Play fetch' at 16:30 (15 min)
+2026-11-25 22:35:39,603 INFO    pawpal_ai.agent: [plan Bean] ACT: 'Breakfast' conflicted at 07:45; moved to 08:00
+2026-11-25 22:35:39,603 INFO    pawpal_ai.agent: [plan Bean] ACT: placed 'Dinner' at 17:30 (10 min)
+2026-11-25 22:35:39,603 INFO    pawpal_ai.agent: [plan Bean] ACT: 'Refresh water bowl' conflicted at 12:00; moved to 12:05
+2026-11-25 22:35:39,603 INFO    pawpal_ai.agent: [plan Bean] CHECK: budget 300 min; existing tasks use 35 min, new tasks add 130 min
+2026-11-25 22:35:39,603 INFO    pawpal_ai.agent: [plan Bean] CHECK: {'no_conflicts': True, 'within_budget': True, 'all_topics_covered': True, 'all_tasks_cited': True}
+2026-11-25 22:35:39,603 INFO    pawpal_ai.agent: [plan Bean] CHECK: confidence=1.0 (retrieval=1.00, grounded=1.00, coverage=1.00, constraints=1.0)
+2026-11-25 22:35:39,603 INFO    pawpal_ai.agent: [plan Rex] PLAN: topics for Rex (dog, senior): feeding, water, exercise, enrichment
+2026-11-25 22:35:39,603 INFO    pawpal_ai.knowledge: search('feeding meals diet food dog', species=dog) -> [('dogs#feeding', 0.3885), ('routines#consistency', 0.2152)]
+2026-11-25 22:35:39,604 INFO    pawpal_ai.knowledge: search('fresh water bowl hydration dog', species=dog) -> [('dogs#feeding', 0.3857), ('dogs#mental-enrichment-and-training', 0.0854)]
+2026-11-25 22:35:39,604 INFO    pawpal_ai.knowledge: search('exercise walks activity free-roam dog', species=dog) -> [('dogs#exercise-and-walks', 0.7074), ('dogs#feeding', 0.2114)]
+2026-11-25 22:35:39,604 INFO    pawpal_ai.knowledge: search('play enrichment toys training social dog', species=dog) -> [('dogs#mental-enrichment-and-training', 0.4693), ('life_stages#young-animals', 0.1354)]
+2026-11-25 22:35:39,604 INFO    pawpal_ai.knowledge: search('senior pets gentle walks', species=dog) -> [('dogs#exercise-and-walks', 0.4589), ('life_stages#senior-pets', 0.3795)]
+2026-11-25 22:35:39,604 INFO    pawpal_ai.agent: [plan Rex] RETRIEVE (round 1): dogs#exercise-and-walks=0.7074, dogs#mental-enrichment-and-training=0.4693, dogs#feeding=0.3885, life_stages#senior-pets=0.3795, routines#consistency=0.2152, life_stages#young-animals=0.1354
+2026-11-25 22:35:39,604 INFO    pawpal_ai.agent: [plan Rex] PROPOSE: 8 candidate task(s) from offline
+2026-11-25 22:35:39,604 INFO    pawpal_ai.agent: [plan Rex] ACT: 'Morning walk' conflicted at 07:00; moved to 07:30
+2026-11-25 22:35:39,604 INFO    pawpal_ai.agent: [plan Rex] ACT: placed 'Evening walk' at 18:30 (30 min)
+2026-11-25 22:35:39,604 INFO    pawpal_ai.agent: [plan Rex] ACT: placed 'Training session' at 16:00 (10 min)
+2026-11-25 22:35:39,604 INFO    pawpal_ai.agent: [plan Rex] ACT: placed 'Play fetch' at 16:30 (15 min)
+2026-11-25 22:35:39,604 INFO    pawpal_ai.agent: [plan Rex] ACT: 'Breakfast' conflicted at 07:45; moved to 08:00
+2026-11-25 22:35:39,604 INFO    pawpal_ai.agent: [plan Rex] ACT: placed 'Dinner' at 17:30 (10 min)
+2026-11-25 22:35:39,605 INFO    pawpal_ai.agent: [plan Rex] ACT: 'Refresh water bowl' conflicted at 12:00; moved to 12:05
+2026-11-25 22:35:39,605 INFO    pawpal_ai.agent: [plan Rex] ACT: 'Gentle short walk' conflicted at 12:00; moved to 12:10
+2026-11-25 22:35:39,605 INFO    pawpal_ai.agent: [plan Rex] CHECK: budget 300 min; existing tasks use 35 min, new tasks add 125 min
+2026-11-25 22:35:39,605 INFO    pawpal_ai.agent: [plan Rex] CHECK: {'no_conflicts': True, 'within_budget': True, 'all_topics_covered': True, 'all_tasks_cited': True}
+2026-11-25 22:35:39,605 INFO    pawpal_ai.agent: [plan Rex] CHECK: confidence=1.0 (retrieval=1.00, grounded=1.00, coverage=1.00, constraints=1.0)
+2026-11-25 22:35:39,605 INFO    pawpal_ai.agent: [plan Thumper] PLAN: topics for Thumper (rabbit, adult): feeding, water, exercise, hygiene
+2026-11-25 22:35:39,605 INFO    pawpal_ai.knowledge: search('feeding meals diet food rabbit', species=rabbit) -> [('rabbits#diet', 0.5212), ('routines#consistency', 0.2083)]
+2026-11-25 22:35:39,606 INFO    pawpal_ai.knowledge: search('fresh water bowl hydration rabbit', species=rabbit) -> [('rabbits#diet', 0.2843), ('rabbits#exercise-and-housing', 0.236)]
+2026-11-25 22:35:39,606 INFO    pawpal_ai.knowledge: search('exercise walks activity free-roam rabbit', species=rabbit) -> [('rabbits#exercise-and-housing', 0.5394), ('rabbits#diet', 0.2042)]
+2026-11-25 22:35:39,606 INFO    pawpal_ai.knowledge: search('litter box cage cleaning hygiene rabbit', species=rabbit) -> [('rabbits#grooming-and-hygiene', 0.5594), ('routines#prioritizing-when-time-is-short', 0.2729)]
+2026-11-25 22:35:39,606 INFO    pawpal_ai.agent: [plan Thumper] RETRIEVE (round 1): rabbits#grooming-and-hygiene=0.5594, rabbits#exercise-and-housing=0.5394, rabbits#diet=0.5212, routines#prioritizing-when-time-is-short=0.2729, routines#consistency=0.2083
+2026-11-25 22:35:39,606 INFO    pawpal_ai.agent: [plan Thumper] PROPOSE: 6 candidate task(s) from offline
+2026-11-25 22:35:39,606 INFO    pawpal_ai.agent: [plan Thumper] ACT: placed 'Clean litter area' at 08:20 (10 min)
+2026-11-25 22:35:39,606 INFO    pawpal_ai.agent: [plan Thumper] ACT: placed 'Brush rabbit' at 19:00 (10 min)
+2026-11-25 22:35:39,606 INFO    pawpal_ai.agent: [plan Thumper] ACT: placed 'Supervised free-roam time' at 17:00 (60 min)
+2026-11-25 22:35:39,606 INFO    pawpal_ai.agent: [plan Thumper] ACT: placed 'Refill hay' at 08:00 (5 min)
+2026-11-25 22:35:39,606 INFO    pawpal_ai.agent: [plan Thumper] ACT: placed 'Fresh greens' at 18:00 (10 min)
+2026-11-25 22:35:39,606 INFO    pawpal_ai.agent: [plan Thumper] ACT: placed 'Refresh water' at 08:10 (5 min)
+2026-11-25 22:35:39,606 INFO    pawpal_ai.agent: [plan Thumper] CHECK: budget 300 min; existing tasks use 35 min, new tasks add 100 min
+2026-11-25 22:35:39,606 INFO    pawpal_ai.agent: [plan Thumper] CHECK: {'no_conflicts': True, 'within_budget': True, 'all_topics_covered': True, 'all_tasks_cited': True}
+2026-11-25 22:35:39,607 INFO    pawpal_ai.agent: [plan Thumper] CHECK: confidence=1.0 (retrieval=1.00, grounded=1.00, coverage=1.00, constraints=1.0)
+2026-11-25 22:35:39,607 INFO    pawpal_ai.agent: [plan Kiwi] PLAN: topics for Kiwi (bird, adult): feeding, enrichment, hygiene
+2026-11-25 22:35:39,607 INFO    pawpal_ai.knowledge: search('feeding meals diet food bird', species=bird) -> [('birds#diet-food-and-water', 0.6052), ('routines#consistency', 0.2101)]
+2026-11-25 22:35:39,607 INFO    pawpal_ai.knowledge: search('play enrichment toys training social bird', species=bird) -> [('birds#social-time-and-enrichment', 0.7786), ('life_stages#young-animals', 0.1315)]
+2026-11-25 22:35:39,607 INFO    pawpal_ai.knowledge: search('litter box cage cleaning hygiene bird', species=bird) -> [('birds#cage-hygiene-and-air-safety', 0.6386), ('birds#social-time-and-enrichment', 0.3218)]
+2026-11-25 22:35:39,607 INFO    pawpal_ai.agent: [plan Kiwi] RETRIEVE (round 1): birds#social-time-and-enrichment=0.7786, birds#cage-hygiene-and-air-safety=0.6386, birds#diet-food-and-water=0.6052, routines#consistency=0.2101, life_stages#young-animals=0.1315
+2026-11-25 22:35:39,607 INFO    pawpal_ai.agent: [plan Kiwi] PROPOSE: 6 candidate task(s) from offline
+2026-11-25 22:35:39,607 INFO    pawpal_ai.agent: [plan Kiwi] ACT: placed 'Out-of-cage social time' at 17:00 (60 min)
+2026-11-25 22:35:39,607 INFO    pawpal_ai.agent: [plan Kiwi] ACT: placed 'Rotate cage toys' at 10:00 (10 min)
+2026-11-25 22:35:39,607 INFO    pawpal_ai.agent: [plan Kiwi] ACT: placed 'Change cage liner' at 08:00 (10 min)
+2026-11-25 22:35:39,608 INFO    pawpal_ai.agent: [plan Kiwi] ACT: placed 'Deep-clean cage' at 11:00 (30 min)
+2026-11-25 22:35:39,608 INFO    pawpal_ai.agent: [plan Kiwi] ACT: placed 'Fresh food and water' at 07:30 (10 min)
+2026-11-25 22:35:39,608 INFO    pawpal_ai.agent: [plan Kiwi] ACT: placed 'Remove leftover fresh food' at 12:30 (5 min)
+2026-11-25 22:35:39,608 INFO    pawpal_ai.agent: [plan Kiwi] CHECK: budget 300 min; existing tasks use 35 min, new tasks add 125 min
+2026-11-25 22:35:39,608 INFO    pawpal_ai.agent: [plan Kiwi] CHECK: {'no_conflicts': True, 'within_budget': True, 'all_topics_covered': True, 'all_tasks_cited': True}
+2026-11-25 22:35:39,608 INFO    pawpal_ai.agent: [plan Kiwi] CHECK: confidence=1.0 (retrieval=1.00, grounded=1.00, coverage=1.00, constraints=1.0)
+2026-11-25 22:35:39,608 INFO    pawpal_ai.agent: [plan Luna] PLAN: topics for Luna (cat, adult): medication
+2026-11-25 22:35:39,608 INFO    pawpal_ai.knowledge: search('giving medication on schedule flea tick prevention cat', species=cat) -> [('medications#flea-tick-and-heartworm-prevention', 0.5104), ('medications#giving-medication-on-schedule', 0.2739)]
+2026-11-25 22:35:39,608 INFO    pawpal_ai.agent: [plan Luna] RETRIEVE (round 1): medications#flea-tick-and-heartworm-prevention=0.5104, medications#giving-medication-on-schedule=0.2739
+2026-11-25 22:35:39,608 INFO    pawpal_ai.agent: [plan Luna] PROPOSE: 1 candidate task(s) from offline
+2026-11-25 22:35:39,608 INFO    pawpal_ai.agent: [plan Luna] VALIDATE: skipped 'Flea and tick prevention' (duplicates existing task 'Flea medication')
+2026-11-25 22:35:39,608 INFO    pawpal_ai.agent: [plan Luna] CHECK: budget 300 min; existing tasks use 35 min, new tasks add 0 min
+2026-11-25 22:35:39,609 INFO    pawpal_ai.agent: [plan Luna] CHECK: {'no_conflicts': True, 'within_budget': True, 'all_topics_covered': True, 'all_tasks_cited': True}
+2026-11-25 22:35:39,609 INFO    pawpal_ai.agent: [plan Luna] CHECK: every requested topic is already covered by existing tasks; nothing new needed
+2026-11-25 22:35:39,609 INFO    pawpal_ai.agent: [plan Luna] CHECK: confidence=0.94 (retrieval=0.78, grounded=1.00, coverage=1.00, constraints=1.0)
+2026-11-25 22:35:39,609 INFO    pawpal_ai.agent: [plan Mochi] PLAN: topics for Mochi (dog, adult): medication
+2026-11-25 22:35:39,609 INFO    pawpal_ai.knowledge: search('giving medication on schedule flea tick prevention dog', species=dog) -> [('medications#flea-tick-and-heartworm-prevention', 0.5085), ('medications#giving-medication-on-schedule', 0.2757)]
+2026-11-25 22:35:39,609 INFO    pawpal_ai.agent: [plan Mochi] RETRIEVE (round 1): medications#flea-tick-and-heartworm-prevention=0.5085, medications#giving-medication-on-schedule=0.2757
+2026-11-25 22:35:39,609 INFO    pawpal_ai.agent: [plan Mochi] PROPOSE: 1 candidate task(s) from offline
+2026-11-25 22:35:39,609 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Give prescribed medication' at 08:00 (5 min)
+2026-11-25 22:35:39,609 INFO    pawpal_ai.agent: [plan Mochi] CHECK: budget 300 min; existing tasks use 35 min, new tasks add 5 min
+2026-11-25 22:35:39,609 INFO    pawpal_ai.agent: [plan Mochi] CHECK: {'no_conflicts': True, 'within_budget': True, 'all_topics_covered': True, 'all_tasks_cited': True}
+2026-11-25 22:35:39,609 INFO    pawpal_ai.agent: [plan Mochi] CHECK: confidence=0.94 (retrieval=0.78, grounded=1.00, coverage=1.00, constraints=1.0)
+2026-11-25 22:35:39,609 INFO    pawpal_ai.agent: [plan Mochi] PLAN: topics for Mochi (dog, adult): feeding, water, exercise, enrichment
+2026-11-25 22:35:39,610 INFO    pawpal_ai.knowledge: search('feeding meals diet food dog', species=dog) -> [('dogs#feeding', 0.3885), ('routines#consistency', 0.2152)]
+2026-11-25 22:35:39,610 INFO    pawpal_ai.knowledge: search('fresh water bowl hydration dog', species=dog) -> [('dogs#feeding', 0.3857), ('dogs#mental-enrichment-and-training', 0.0854)]
+2026-11-25 22:35:39,610 INFO    pawpal_ai.knowledge: search('exercise walks activity free-roam dog', species=dog) -> [('dogs#exercise-and-walks', 0.7074), ('dogs#feeding', 0.2114)]
+2026-11-25 22:35:39,610 INFO    pawpal_ai.knowledge: search('play enrichment toys training social dog', species=dog) -> [('dogs#mental-enrichment-and-training', 0.4693), ('life_stages#young-animals', 0.1354)]
+2026-11-25 22:35:39,610 INFO    pawpal_ai.agent: [plan Mochi] RETRIEVE (round 1): dogs#exercise-and-walks=0.7074, dogs#mental-enrichment-and-training=0.4693, dogs#feeding=0.3885, routines#consistency=0.2152, life_stages#young-animals=0.1354
+2026-11-25 22:35:39,610 INFO    pawpal_ai.agent: [plan Mochi] PROPOSE: 7 candidate task(s) from offline
+2026-11-25 22:35:39,610 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Evening walk' at 18:30 (30 min)
+2026-11-25 22:35:39,610 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Training session' at 16:00 (10 min)
+2026-11-25 22:35:39,610 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Play fetch' at 16:30 (15 min)
+2026-11-25 22:35:39,610 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Breakfast' at 07:45 (10 min)
+2026-11-25 22:35:39,610 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Dinner' at 17:30 (10 min)
+2026-11-25 22:35:39,610 INFO    pawpal_ai.agent: [plan Mochi] ACT: 'Refresh water bowl' conflicted at 12:00; moved to 12:05
+2026-11-25 22:35:39,611 INFO    pawpal_ai.agent: [plan Mochi] CHECK: budget 50 min; existing tasks use 35 min, new tasks add 80 min
+2026-11-25 22:35:39,611 INFO    pawpal_ai.agent: [plan Mochi] CHECK: over budget, dropped 'Play fetch' (low)
+2026-11-25 22:35:39,611 INFO    pawpal_ai.agent: [plan Mochi] CHECK: over budget, dropped 'Evening walk' (medium)
+2026-11-25 22:35:39,611 INFO    pawpal_ai.agent: [plan Mochi] CHECK: over budget, dropped 'Training session' (medium)
+2026-11-25 22:35:39,611 INFO    pawpal_ai.agent: [plan Mochi] CHECK: over budget, dropped 'Refresh water bowl' (medium)
+2026-11-25 22:35:39,611 INFO    pawpal_ai.agent: [plan Mochi] CHECK: {'no_conflicts': True, 'within_budget': False, 'all_topics_covered': False, 'all_tasks_cited': True} uncovered=['water', 'enrichment']
+2026-11-25 22:35:39,611 INFO    pawpal_ai.agent: [plan Mochi] CHECK: confidence=0.75 (retrieval=1.00, grounded=1.00, coverage=0.50, constraints=0.5)
+2026-11-25 22:35:39,611 INFO    pawpal_ai.agent: [plan Luna] Request blocked by safety guardrail: it mentions a human medication. No plan generated; please talk to your veterinarian.
+2026-11-25 22:35:39,611 INFO    pawpal_ai.agent: [plan Mochi] Emergency language detected; no plan generated. ⚠️ This may be an emergency. Contact your veterinarian, the nearest emergency animal clinic, or an animal poison control line right now. Do not wait to see if it improves. PawPal+ is a planning tool and cannot give medical treatment advice.
+2026-11-25 22:35:53,849 INFO    pawpal_ai.knowledge: Loaded 24 chunks from knowledge/
+2026-11-25 22:35:53,851 INFO    pawpal_ai.agent: CareAssistant ready (backend=offline, 24 chunks)
+2026-11-25 22:35:53,897 INFO    pawpal_ai.knowledge: search('How often should I walk my dog?', species=dog) -> [('dogs#exercise-and-walks', 0.5631), ('dogs#feeding', 0.1779), ('dogs#mental-enrichment-and-training', 0.1704)]
+2026-11-25 22:35:53,897 INFO    pawpal_ai.agent: Answered 'How often should I walk my dog?' with ['dogs#exercise-and-walks'] (confidence 0.96)
+2026-11-25 22:35:53,972 INFO    pawpal_ai.agent: [plan Mochi] PLAN: topics for Mochi (dog, adult): feeding, water, exercise, enrichment
+2026-11-25 22:35:53,973 INFO    pawpal_ai.knowledge: search('feeding meals diet food dog', species=dog) -> [('dogs#feeding', 0.3885), ('routines#consistency', 0.2152)]
+2026-11-25 22:35:53,973 INFO    pawpal_ai.knowledge: search('fresh water bowl hydration dog', species=dog) -> [('dogs#feeding', 0.3857), ('dogs#mental-enrichment-and-training', 0.0854)]
+2026-11-25 22:35:53,973 INFO    pawpal_ai.knowledge: search('exercise walks activity free-roam dog', species=dog) -> [('dogs#exercise-and-walks', 0.7074), ('dogs#feeding', 0.2114)]
+2026-11-25 22:35:53,973 INFO    pawpal_ai.knowledge: search('play enrichment toys training social dog', species=dog) -> [('dogs#mental-enrichment-and-training', 0.4693), ('life_stages#young-animals', 0.1354)]
+2026-11-25 22:35:53,973 INFO    pawpal_ai.agent: [plan Mochi] RETRIEVE (round 1): dogs#exercise-and-walks=0.7074, dogs#mental-enrichment-and-training=0.4693, dogs#feeding=0.3885, routines#consistency=0.2152, life_stages#young-animals=0.1354
+2026-11-25 22:35:53,973 INFO    pawpal_ai.agent: [plan Mochi] PROPOSE: 7 candidate task(s) from offline
+2026-11-25 22:35:53,973 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Morning walk' at 07:00 (30 min)
+2026-11-25 22:35:53,973 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Evening walk' at 18:30 (30 min)
+2026-11-25 22:35:53,974 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Training session' at 16:00 (10 min)
+2026-11-25 22:35:53,974 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Play fetch' at 16:30 (15 min)
+2026-11-25 22:35:53,974 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Breakfast' at 07:45 (10 min)
+2026-11-25 22:35:53,974 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Dinner' at 17:30 (10 min)
+2026-11-25 22:35:53,975 INFO    pawpal_ai.agent: [plan Mochi] ACT: placed 'Refresh water bowl' at 12:00 (5 min)
+2026-11-25 22:35:53,975 INFO    pawpal_ai.agent: [plan Mochi] CHECK: budget 120 min; existing tasks use 0 min, new tasks add 110 min
+2026-11-25 22:35:53,975 INFO    pawpal_ai.agent: [plan Mochi] CHECK: {'no_conflicts': True, 'within_budget': True, 'all_topics_covered': True, 'all_tasks_cited': True}
+2026-11-25 22:35:53,975 INFO    pawpal_ai.agent: [plan Mochi] CHECK: confidence=1.0 (retrieval=1.00, grounded=1.00, coverage=1.00, constraints=1.0)
+2026-11-25 22:35:54,057 INFO    pawpal_ai.agent: Applied 6 approved task(s) to Mochi

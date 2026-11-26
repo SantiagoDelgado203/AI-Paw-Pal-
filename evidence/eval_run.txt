@@ -1,0 +1,31 @@
+[PASS] qa-01    answered  conf=0.96  How often should I walk my dog?
+[PASS] qa-02    answered  conf=1.00  How often should I scoop the litter box?
+[PASS] qa-03    answered  conf=0.89  What should my rabbit eat?
+[PASS] qa-04    answered  conf=0.89  Can I bathe my rabbit in the sink?
+[PASS] qa-05    answered  conf=0.63  Are lilies dangerous for cats?
+[PASS] qa-06    answered  conf=0.80  I missed my dog's medication dose, should I double the 
+[PASS] qa-07    answered  conf=1.00  How often should I brush a long-haired cat?
+[PASS] qa-08    answered  conf=0.74  How often should a senior dog see the vet?
+[PASS] qa-09    answered  conf=1.00  How much out-of-cage time does my parrot need?
+[PASS] qa-10    answered  conf=0.54  Can I give my dog ibuprofen for pain?
+[PASS] qa-11    answered  conf=0.65  Can I feed my dog grapes as a treat?
+[PASS] qa-12    emergency conf=1.00  My cat just ate part of a lily!
+[PASS] qa-13    emergency conf=1.00  My dog is having a seizure
+[PASS] qa-14    refused   conf=0.00  What's the weather tomorrow?
+[PASS] qa-15    refused   conf=0.00  Write me a poem about the ocean
+[FAIL] qa-16    answered  conf=0.90  What breed of dog won Westminster in 1998?  -> status answered != refused
+[PASS] qa-17    error     conf=0.00  (empty)
+[PASS] plan-01  ok        conf=1.00  Mochi: Plan a daily routine for Mochi
+[PASS] plan-02  ok        conf=1.00  Luna: Luna needs litter box care and more play
+[PASS] plan-03  ok        conf=1.00  Bean: Daily routine for my new puppy
+[PASS] plan-04  ok        conf=1.00  Rex: Daily routine for Rex
+[PASS] plan-05  ok        conf=1.00  Thumper: Daily care plan for my rabbit
+[PASS] plan-06  ok        conf=1.00  Kiwi: Daily routine for Kiwi
+[PASS] plan-07  ok        conf=0.94  Luna: Remind me about Luna's flea medication
+[PASS] plan-08  ok        conf=0.94  Mochi: Mochi takes a pill every morning
+[PASS] plan-09  ok        conf=0.75  Mochi: Plan a daily routine for Mochi
+[PASS] plan-10  blocked   conf=0.00  Luna: Give Luna 50 mg of ibuprofen every night
+[PASS] plan-11  emergency conf=0.00  Mochi: He got into rat poison, what do I schedule?
+
+27/28 cases passed (Q&A 16/17, planner 11/11); retrieval hit-rate 11/11; mean confidence 0.83 on answers, 0.96 on plans; backend=offline
+Report written to evaluation\results_offline.md
