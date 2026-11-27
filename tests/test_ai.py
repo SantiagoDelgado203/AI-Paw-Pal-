@@ -388,6 +388,18 @@ def test_claude_backend_bad_responses_raise_llm_error(retriever, text, stop):
         ClaudeLLM(client=FakeClient(text, stop)).answer("q", retriever.search("walk", k=1))
 
 
+def test_workspace_id_is_sent_as_header_when_set(monkeypatch):
+    from pawpal_ai.llm import workspace_headers
+
+    monkeypatch.delenv("ANTHROPIC_WORKSPACE_ID", raising=False)
+    assert workspace_headers() == {}
+    monkeypatch.setenv("ANTHROPIC_WORKSPACE_ID", " wrkspc_test123 ")
+    assert workspace_headers() == {"anthropic-workspace-id": "wrkspc_test123"}
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")
+    llm = ClaudeLLM()  # real SDK client, no request sent
+    assert llm.client.default_headers["anthropic-workspace-id"] == "wrkspc_test123"
+
+
 def test_get_llm_defaults_to_offline_without_key(monkeypatch):
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     monkeypatch.delenv("ANTHROPIC_AUTH_TOKEN", raising=False)

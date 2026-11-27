@@ -177,6 +177,16 @@ PLAN_SCHEMA = {
 }
 
 
+def workspace_headers() -> dict[str, str]:
+    """Extra headers for keys that aren't scoped to one workspace.
+
+    Such keys must name a workspace on every request. Set ANTHROPIC_WORKSPACE_ID (the
+    "wrkspc_..." id from the Claude Console) and it is sent as the anthropic-workspace-id header.
+    """
+    workspace = os.environ.get("ANTHROPIC_WORKSPACE_ID", "").strip()
+    return {"anthropic-workspace-id": workspace} if workspace else {}
+
+
 class ClaudeLLM:
     """Backend that calls Claude with schema-constrained JSON output."""
 
@@ -187,7 +197,7 @@ class ClaudeLLM:
         if client is None:
             import anthropic  # imported lazily so offline mode never needs the package
 
-            client = anthropic.Anthropic()
+            client = anthropic.Anthropic(default_headers=workspace_headers())
         self.client = client
         self.model = model
 

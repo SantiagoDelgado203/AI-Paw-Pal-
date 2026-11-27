@@ -79,8 +79,11 @@ pip install -r requirements.txt
 
 ```bash
 export ANTHROPIC_API_KEY=sk-ant-...      # Windows PowerShell: $env:ANTHROPIC_API_KEY="sk-ant-..."
+export ANTHROPIC_WORKSPACE_ID=wrkspc_... # only if your key is not scoped to a workspace
 export PAWPAL_LLM=claude                 # or: offline | auto (default: Claude if a key is set)
 ```
+
+The key and workspace ID are read from environment variables (`pawpal_ai/llm.py`), so they never appear in the code or the repo. Set them in the same terminal you start the app from.
 
 | Command | What it does |
 |---|---|
@@ -88,7 +91,7 @@ export PAWPAL_LLM=claude                 # or: offline | auto (default: Claude i
 | `python ai_assistant.py demo` | Scripted walkthrough of every AI feature |
 | `python ai_assistant.py ask "How often should I walk my dog?" --species dog` | Ask one question |
 | `python ai_assistant.py plan --pet Mochi "Plan a daily routine"` | Draft a plan for the demo household (`--data data.json --apply` to save) |
-| `python -m pytest` | Run all 92 tests |
+| `python -m pytest` | Run all 93 tests |
 | `python evaluation/run_eval.py` | Run the 28-case evaluation and write `evaluation/results_offline.md` |
 | `python main.py` | The original Module 2 scheduler demo |
 
